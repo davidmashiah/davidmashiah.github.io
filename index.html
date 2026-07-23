@@ -3,12 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>David Mashiah — clinical &amp; academic systems</title>
-<meta name="description" content="Software for clinics and universities, in Hebrew and Arabic, for people who cannot read small type. Regulated health software, multi-tenant systems, real-time at scale.">
+<title>David Mashiah — Hebrew-first clinical &amp; academic software engineering</title>
+<meta name="description" content="David Mashiah builds accessible, Hebrew-first software for clinics and universities: WCAG-AAA interfaces for low-vision users, multi-tenant systems, and real-time platforms at 1,000 concurrent users. Includes a calibrated vernier hyperacuity demonstration you can run in your browser.">
+<meta name="author" content="David Mashiah">
 <meta name="color-scheme" content="light dark">
-<meta property="og:title" content="David Mashiah">
-<meta property="og:description" content="Software for clinics and universities, in Hebrew and Arabic, built to stay maintainable.">
-<meta property="og:type" content="website">
+<link rel="canonical" href="https://davidmashiah.github.io/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="David Mashiah">
+<meta property="og:url" content="https://davidmashiah.github.io/">
+<meta property="og:title" content="David Mashiah — Hebrew-first clinical &amp; academic software engineering">
+<meta property="og:description" content="Accessible, Hebrew-first software for clinics and universities. Run a calibrated vernier hyperacuity test in your browser — and see why a screen cannot make it a diagnosis.">
+<meta property="og:image" content="https://davidmashiah.github.io/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="David Mashiah — clinical and academic systems">
+<meta property="profile:first_name" content="David">
+<meta property="profile:last_name" content="Mashiah">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="David Mashiah — Hebrew-first clinical &amp; academic software engineering">
+<meta name="twitter:description" content="Run a calibrated vernier hyperacuity test in your browser — and see why a screen cannot make it a diagnosis.">
+<meta name="twitter:image" content="https://davidmashiah.github.io/assets/og.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://davidmashiah.github.io/#person",
+      "name": "David Mashiah",
+      "givenName": "David",
+      "familyName": "Mashiah",
+      "url": "https://davidmashiah.github.io/",
+      "image": "https://davidmashiah.github.io/assets/og.png",
+      "jobTitle": "Software engineer and systems architect",
+      "description": "Builds Hebrew-first, accessible software for clinical and academic settings, including regulated health software, multi-tenant SaaS and real-time platforms.",
+      "knowsLanguage": ["he", "ar", "en"],
+      "knowsAbout": [
+        "Web accessibility",
+        "WCAG AAA",
+        "Right-to-left interface design",
+        "Hebrew localisation",
+        "Software as a Medical Device",
+        "Age-related macular degeneration monitoring",
+        "Vernier hyperacuity",
+        "Multi-tenant architecture",
+        "Real-time systems",
+        "Cloudflare Durable Objects",
+        "Local-first software",
+        "SQLite"
+      ],
+      "sameAs": [
+        "https://github.com/davidmashiah",
+        "https://www.linkedin.com/in/david-mashiah-202759320",
+        "https://www.researchgate.net/profile/David-Mashiah"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://davidmashiah.github.io/#website",
+      "url": "https://davidmashiah.github.io/",
+      "name": "David Mashiah",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://davidmashiah.github.io/#person" }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://davidmashiah.github.io/#vernier",
+      "name": "Vernier hyperacuity demonstration",
+      "url": "https://davidmashiah.github.io/#demo",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Any modern web browser",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "author": { "@id": "https://davidmashiah.github.io/#person" },
+      "description": "A calibrated vernier acuity task using a 2-down/1-up adaptive staircase. Calibrates the display against a standard payment card, reports the measured offset threshold in arcseconds, and explains why a screen's pixel pitch is roughly twenty times too coarse for a clinical hyperacuity measurement. A demonstration, not a vision test or medical device."
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -246,6 +322,39 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 }
 .result hr{border:0; border-top:1px solid var(--hair); margin:22px 0}
 .hide{display:none}
+
+/* ── scale diagram ──────────────────────── */
+.essay{margin-top:56px; max-width:74ch}
+.essay h3{font-size:clamp(21px,2.8vw,27px); font-weight:700; letter-spacing:-.022em; margin:0 0 16px}
+.essay p{color:var(--muted); font-weight:300; margin:0 0 17px}
+.essay p b{color:var(--ink); font-weight:500}
+.essay a{color:var(--primary); text-decoration:none; border-bottom:1px solid color-mix(in srgb, var(--primary) 35%, transparent)}
+.essay a:hover{border-bottom-color:var(--primary)}
+.refs{font-size:14px; color:var(--faint); border-top:1px solid var(--hair); padding-top:16px; margin-top:26px}
+.refs a{color:var(--faint)}
+
+.scale{
+  border:1px solid var(--line); border-radius:14px; background:var(--paper);
+  padding:34px clamp(18px,3vw,34px) 26px; margin:30px 0 34px; box-shadow:var(--shadow);
+}
+.track{position:relative; height:2px; background:var(--line); margin:78px 0 0}
+.band{
+  position:absolute; top:-9px; height:20px; border-radius:4px;
+  background:color-mix(in srgb, var(--accent) 30%, transparent);
+  border:1px solid var(--accent);
+}
+.mk{position:absolute; top:-16px; width:2px; height:34px; background:var(--primary)}
+.mk.alt{background:var(--muted)}
+.cap{
+  position:absolute; font-size:13px; line-height:1.35; color:var(--muted);
+  width:132px; font-weight:400;
+}
+.cap b{display:block; color:var(--ink); font-weight:600; font-size:13.5px}
+.cap.up{bottom:26px} .cap.up2{bottom:64px} .cap.down{top:26px}
+.ticks{position:relative; height:26px; margin-top:6px}
+.ticks span{position:absolute; transform:translateX(-50%); font-size:12px; color:var(--faint); letter-spacing:.5px}
+.scalelead{font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--faint); font-weight:600; margin:0 0 4px}
+@media(max-width:700px){ .cap{width:104px; font-size:12px} .cap b{font-size:12.5px} }
 
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -574,6 +683,45 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
         <div id="res" class="hide result" tabindex="-1"></div>
       </div>
     </div>
+
+    <article class="essay">
+      <h3>Why a browser cannot measure hyperacuity</h3>
+
+      <p>Vernier acuity is the ability to tell that two line segments are not collinear. It is called a <b>hyperacuity</b> because the threshold is finer than the spacing of the photoreceptor mosaic itself — the retina does not resolve the offset, the cortex infers it from the luminance distribution across several receptors. Reported thresholds sit around <b>2–5 arcseconds</b>, roughly ten times finer than standard visual acuity, which is about one arcminute, or 60 arcseconds.</p>
+
+      <p>That sensitivity is precisely why it is clinically useful. Metamorphopsia — the perceived warping of straight lines caused by fluid lifting the macula — shows up in a hyperacuity task long before it shows up on a letter chart. Preferential hyperacuity perimetry exploits exactly this, and has been reported discriminating wet AMD with an area under the ROC curve of 0.87.</p>
+
+      <p>Now put that on a screen. At a 60&nbsp;cm viewing distance, a single pixel on a typical display subtends roughly <b>90 arcseconds</b>. The quantity being measured is 2–5. <b>One pixel is about twenty times coarser than the entire clinical range.</b></p>
+
+      <div class="scale">
+        <p class="scalelead">Angular size, logarithmic — arcseconds</p>
+        <div class="track">
+          <div class="band" style="left:13.1%; width:17.3%"></div>
+          <div class="cap down" style="left:13.1%"><b>2–5″</b>Clinical vernier threshold</div>
+
+          <div class="mk alt" style="left:77.3%"></div>
+          <div class="cap up2" style="left:calc(77.3% - 132px)"><b>60″</b>Standard visual acuity (1′)</div>
+
+          <div class="mk" style="left:84.9%"></div>
+          <div class="cap up" style="left:84.9%"><b>≈ 90″</b>One screen pixel at 60 cm</div>
+        </div>
+        <div class="ticks">
+          <span style="left:0%">1″</span>
+          <span style="left:43.5%">10″</span>
+          <span style="left:86.9%">100″</span>
+        </div>
+      </div>
+
+      <p>The demonstration above still reaches sub-pixel thresholds, and the reason is worth stating: an offset of a fraction of a pixel is not discarded, it is <b>antialiased</b>. The renderer distributes the line's energy across neighbouring pixels, shifting the luminance centroid by less than the pixel pitch, and the visual system integrates that shift. So the task is measurable — but below one pixel you are partly characterising the rendering pipeline, the panel's subpixel geometry and its gamma, not only the observer.</p>
+
+      <p>This is the distinction between a demonstration and an instrument. A browser can show you the phenomenon and let you feel where your own threshold lies. It cannot control viewing distance, luminance, contrast calibration, refraction, or pixel geometry — and without those the number is not a measurement of the eye. That is not a disclaimer bolted onto the end of a product. <b>It is the reason the product was labelled not for diagnostic use</b>, and it is the kind of constraint that has to be settled before any code is written, not after.</p>
+
+      <p class="refs">
+        Sources —
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8523788/" rel="noopener">The Clinical Use of Vernier Acuity: Resolution of the Visual Cortex Is More Than Meets the Eye</a> ·
+        <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5861526/" rel="noopener">Accuracy of a Self-monitoring Test for Identification and Monitoring of Age-related Macular Degeneration</a>
+      </p>
+    </article>
   </div>
 </section>
 
