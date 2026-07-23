@@ -200,6 +200,53 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 @keyframes ping{0%{transform:scale(.55);opacity:.9}70%,100%{transform:scale(2.1);opacity:0}}
 .beat{animation:bre 2.6s ease-in-out infinite} .beat2{animation-delay:.3s} .beat3{animation-delay:.6s}
 
+/* ── demonstration ──────────────────────── */
+.demo{border:1px solid var(--line); border-radius:16px; background:var(--paper); box-shadow:var(--shadow); padding:clamp(20px,3vw,34px)}
+.warn{
+  border:1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background:color-mix(in srgb, var(--accent) 8%, transparent);
+  border-radius:11px; padding:15px 18px; margin:0 0 28px; font-size:14.8px; color:var(--muted); font-weight:300;
+}
+.warn b{color:var(--ink); font-weight:600}
+.step{border-top:1px solid var(--hair); padding:24px 0}
+.step:first-of-type{border-top:0; padding-top:0}
+.step:last-of-type{padding-bottom:0}
+.step h4{margin:0 0 7px; font-size:12.5px; letter-spacing:2px; text-transform:uppercase; color:var(--faint); font-weight:600}
+.step > p{margin:0 0 18px; color:var(--muted); font-size:15.4px; font-weight:300; max-width:62ch}
+.step > p b{color:var(--ink); font-weight:500}
+.card{
+  height:auto; aspect-ratio:85.6/53.98; border-radius:9px; margin-bottom:16px;
+  background:linear-gradient(135deg, var(--primary), var(--accent)); opacity:.92;
+}
+.rng{width:100%; max-width:440px; accent-color:var(--primary); height:40px; cursor:pointer}
+.field{display:flex; gap:11px; align-items:center; flex-wrap:wrap; color:var(--muted); font-size:15px}
+.num{
+  width:96px; min-height:48px; padding:10px 13px; border:1px solid var(--line); border-radius:9px;
+  background:var(--bg); color:var(--ink); font:inherit; font-size:16px;
+}
+.btn{
+  min-height:48px; padding:12px 22px; border-radius:10px; border:1px solid var(--line);
+  background:var(--bg); color:var(--ink); font:inherit; font-size:16px; font-weight:500; cursor:pointer; transition:all .16s;
+}
+.btn:hover{border-color:var(--primary); color:var(--primary)}
+.btn.primary{background:var(--primary); border-color:var(--primary); color:#fff}
+.btn.primary:hover{color:#fff; opacity:.9}
+.btn:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+.stimbox{position:relative; height:250px; max-width:440px; margin:6px auto 24px}
+.bar{position:absolute; left:50%; width:5px; background:var(--ink); border-radius:2px}
+#topbar{top:20px; height:96px}
+#botbar{top:134px; height:96px; transform:translateX(-50%)}
+.answers{display:flex; gap:12px; justify-content:center; flex-wrap:wrap}
+.prog{font-size:13px; color:var(--faint); text-align:center; margin-top:16px; letter-spacing:1.4px}
+.result{font-size:16px; line-height:1.72; color:var(--muted); font-weight:300}
+.result b{color:var(--ink); font-weight:600}
+.result .big{
+  display:block; font-size:clamp(26px,4.4vw,40px); font-weight:900; color:var(--primary);
+  letter-spacing:-.03em; margin:4px 0 16px; line-height:1.08;
+}
+.result hr{border:0; border-top:1px solid var(--hair); margin:22px 0}
+.hide{display:none}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important; transition:none!important}
@@ -220,6 +267,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
     <nav>
       <a class="lnk" href="#spec">Specification</a>
       <a class="lnk" href="#work">Work</a>
+      <a class="lnk" href="#demo">Demonstration</a>
       <a class="lnk" href="#invariants">Invariants</a>
       <button class="toggle" id="tt" aria-label="Switch colour theme" title="Switch colour theme">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
@@ -242,6 +290,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
         <span class="tag">Multi-tenant</span>
         <span class="tag">Real-time at scale</span>
       </div>
+      <p style="margin:26px 0 0"><a href="#demo" style="color:var(--primary); font-weight:500; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px">Measure your own vernier hyperacuity →</a></p>
     </div>
 
     <div class="stage">
@@ -477,9 +526,60 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
   </div>
 </section>
 
+<section id="demo">
+  <div class="wrap rv">
+    <div class="eyebrow">03 — Demonstration</div>
+    <h2>Vernier hyperacuity, measured in your browser</h2>
+    <p class="sub">The perceptual effect Qeben is built on, as a working instrument — including an honest account of what a screen can and cannot measure.</p>
+
+    <div class="demo">
+      <p class="warn"><b>This is a demonstration, not a vision test.</b> It is not a medical device, it produces no diagnosis, and nothing here should inform a decision about your eyes. If your vision has changed, see an optometrist or ophthalmologist.</p>
+
+      <div class="step">
+        <h4>Step 1 — Calibrate the display</h4>
+        <p>Hold any bank card flat against the screen and drag the slider until the rectangle matches it exactly. Payment cards are standardised worldwide at <b>85.60 × 53.98 mm</b>, which makes them a reliable ruler for finding your display's true pixel pitch.</p>
+        <div class="card" id="cardBox" style="width:330px"></div>
+        <input class="rng" type="range" id="cardW" min="170" max="640" value="330" aria-label="Card width in pixels">
+        <div class="prog" id="ppm"></div>
+      </div>
+
+      <div class="step">
+        <h4>Step 2 — Viewing distance</h4>
+        <p>How far are your eyes from the screen? Measure it if you can — a guess propagates straight into the arithmetic below.</p>
+        <div class="field">
+          <label for="dist">Distance</label>
+          <input class="num" type="number" id="dist" value="60" min="15" max="200" step="1">
+          <span>cm</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <h4>Step 3 — The task</h4>
+        <p>Two vertical segments appear with a gap between them. Decide whether the <b>upper</b> segment sits to the left or the right of the lower one. Fourteen trials, about a minute. The offset shrinks when you are right and grows when you are wrong, so it converges on your threshold rather than testing you at a fixed difficulty. Buttons or the ← → keys.</p>
+
+        <div id="pre"><button class="btn primary" id="go">Start the task</button></div>
+
+        <div id="task" class="hide">
+          <div class="stimbox" role="img" aria-label="Two vertical line segments, one above the other, with a small horizontal offset between them">
+            <div class="bar" id="topbar"></div>
+            <div class="bar" id="botbar"></div>
+          </div>
+          <div class="answers">
+            <button class="btn" data-a="left">← Upper is left</button>
+            <button class="btn" data-a="right">Upper is right →</button>
+          </div>
+          <div class="prog" id="prog" aria-live="polite"></div>
+        </div>
+
+        <div id="res" class="hide result" tabindex="-1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="invariants">
   <div class="wrap rv">
-    <div class="eyebrow">03 — Invariants</div>
+    <div class="eyebrow">04 — Invariants</div>
     <h2>Checked by a machine, not remembered by a person</h2>
     <p class="sub">Conventions are forgotten the week after they are agreed. These fail the build.</p>
     <div class="inv">
@@ -546,6 +646,86 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
       if (p < 1) requestAnimationFrame(step);
     });
   }
+
+  /* ── vernier hyperacuity demonstration ─────────────────────────
+     A 2-down / 1-up adaptive staircase, which converges on the offset
+     detected correctly about 71% of the time. Offsets are applied as
+     fractional CSS pixels: sub-pixel positions are still rendered via
+     antialiasing, which is the only reason thresholds below one whole
+     pixel are reachable at all. */
+  var CARD_MM = 85.60, RAD_TO_ARCSEC = 206265, TRIALS = 14;
+  var cardW = document.getElementById('cardW'), cardBox = document.getElementById('cardBox');
+  var ppm = document.getElementById('ppm'), distEl = document.getElementById('dist');
+  var topbar = document.getElementById('topbar'), prog = document.getElementById('prog');
+  var pre = document.getElementById('pre'), task = document.getElementById('task'), res = document.getElementById('res');
+
+  function pxPerMm(){ return parseFloat(cardW.value) / CARD_MM; }
+  function arcsec(lenPx){
+    var lenMm = lenPx / pxPerMm(), distMm = Math.max(1, parseFloat(distEl.value) || 60) * 10;
+    return 2 * Math.atan(lenMm / (2 * distMm)) * RAD_TO_ARCSEC;
+  }
+  function showCal(){
+    cardBox.style.width = cardW.value + 'px';
+    ppm.textContent = pxPerMm().toFixed(2) + ' px/mm · one pixel subtends ≈ ' + Math.round(arcsec(1)) + '″ at ' + (parseFloat(distEl.value)||60) + ' cm';
+  }
+  cardW.addEventListener('input', showCal);
+  distEl.addEventListener('input', showCal);
+  showCal();
+
+  var offset, dir, run, trial, lastMove, reversals;
+
+  function render(){
+    dir = Math.random() < 0.5 ? -1 : 1;
+    topbar.style.transform = 'translateX(calc(-50% + ' + (dir * offset).toFixed(3) + 'px))';
+    prog.textContent = 'TRIAL ' + (trial + 1) + ' OF ' + TRIALS;
+  }
+  function move(d){
+    var before = offset;
+    offset = d < 0 ? offset * 0.78 : offset * 1.28;
+    offset = Math.min(40, Math.max(0.05, offset));
+    if (lastMove !== null && d !== lastMove) reversals.push(before);
+    lastMove = d;
+  }
+  function answer(a){
+    var ok = (a === 'left' && dir < 0) || (a === 'right' && dir > 0);
+    if (ok) { run++; if (run >= 2) { run = 0; move(-1); } }
+    else { run = 0; move(1); }
+    trial++;
+    if (trial >= TRIALS) finish(); else render();
+  }
+  function finish(){
+    var used = reversals.slice(-6);
+    var thr = used.length ? used.reduce(function(a,b){return a+b;},0) / used.length : offset;
+    var a = arcsec(thr), one = arcsec(1), ratio = Math.round(a / 4);
+    task.classList.add('hide');
+    res.classList.remove('hide');
+    res.innerHTML =
+      'Smallest offset you reliably detected' +
+      '<span class="big">' + thr.toFixed(2) + ' px &nbsp;·&nbsp; ≈ ' + Math.round(a) + '″ of arc</span>' +
+      'Measured at <b>' + pxPerMm().toFixed(2) + ' px/mm</b> and <b>' + (parseFloat(distEl.value)||60) + ' cm</b>. ' +
+      'A single pixel on your display subtends <b>≈ ' + Math.round(one) + '″</b>, so anything finer than that was only reachable because sub-pixel offsets are drawn with antialiasing rather than by moving a whole pixel.' +
+      '<hr>' +
+      'Clinical vernier thresholds sit at <b>2–5″</b> — roughly <b>' + ratio + '× finer</b> than what your screen can address. ' +
+      'That gap is not a limitation of this page; it is a property of the display. It is the concrete reason a browser cannot be a diagnostic instrument, and why Qeben carried a <b>not for diagnostic use</b> label rather than a claim.' +
+      '<hr>' +
+      '<button class="btn" id="again">Run it again</button>';
+    res.focus();
+    document.getElementById('again').addEventListener('click', start);
+  }
+  function start(){
+    offset = 20; run = 0; trial = 0; lastMove = null; reversals = [];
+    pre.classList.add('hide'); res.classList.add('hide'); task.classList.remove('hide');
+    render();
+  }
+  document.getElementById('go').addEventListener('click', start);
+  document.querySelectorAll('[data-a]').forEach(function(b){
+    b.addEventListener('click', function(){ answer(b.dataset.a); });
+  });
+  document.addEventListener('keydown', function(e){
+    if (task.classList.contains('hide')) return;
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); answer('left'); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); answer('right'); }
+  });
 })();
 </script>
 </body>
