@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://davidmashiah.github.io/sitemap.xml
+Sitemap: https://davidmashiah.com/sitemap.xml
