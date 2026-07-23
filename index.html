@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -219,6 +219,19 @@ section{padding:clamp(58px,8vw,104px) 0}
   font-size:12px; letter-spacing:2.6px; text-transform:uppercase; color:var(--faint); font-weight:600;
 }
 .eyebrow::after{content:""; flex:1; height:1px; background:var(--line)}
+.eyebrow i{
+  font-style:normal; font-size:clamp(38px,6.2vw,68px); font-weight:900; letter-spacing:-.05em;
+  line-height:.82; color:var(--line); margin-inline-end:2px;
+}
+@supports (-webkit-text-stroke: 1px black){
+  .eyebrow i{ color:transparent; -webkit-text-stroke:1.6px var(--line); }
+}
+.motif{
+  background:linear-gradient(160deg,
+    color-mix(in srgb, var(--primary) 7%, var(--paper)),
+    var(--paper) 62%);
+  padding:14px 0;
+}
 h2{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.028em; margin:0 0 14px; line-height:1.1}
 .sub{color:var(--muted); max-width:60ch; margin:0 0 34px; font-weight:300}
 
@@ -623,7 +636,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 
 <section id="method">
   <div class="wrap rv">
-    <div class="eyebrow">01 — Method</div>
+    <div class="eyebrow"><i>01</i> Method</div>
     <h2 data-he="איך אדם אחד בונה כל כך הרבה">How one person ships this much</h2>
     <p class="sub">The limit on a solo builder is not ambition, it is attention. Nobody holds three unrelated systems in their head at once — so the codebase has to hold itself.</p>
 
@@ -648,7 +661,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 
 <section id="spec">
   <div class="wrap rv">
-    <div class="eyebrow">02 — Constraints</div>
+    <div class="eyebrow"><i>02</i> Constraints</div>
     <h2 data-he="הדרישות שאני בוחר בהן שוב ושוב">The requirements I keep choosing</h2>
     <p class="sub">I am not a clinician and not an accessibility specialist. I am a generalist who keeps picking problems with awkward requirements attached — and these are the conditions that follow from them.</p>
     <table class="spec">
@@ -670,7 +683,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 <section id="work">
   <div class="wrap">
     <div class="rv">
-      <div class="eyebrow">03 — Work</div>
+      <div class="eyebrow"><i>03</i> Work</div>
       <h2 data-he="שלוש מערכות, שנבנו לבד">Three systems, built solo</h2>
       <p class="sub">One clinical, one real-time, one local-first. No team on any of them. One reached a university stage, one reached clinicians and stopped, one runs my own life — the scoreboard is stated as it is, project by project.</p>
     </div>
@@ -805,7 +818,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 
 <section id="demo">
   <div class="wrap rv">
-    <div class="eyebrow">04 — Demonstration</div>
+    <div class="eyebrow"><i>04</i> Demonstration</div>
     <h2 data-he="חדות ורנייה, נמדדת בדפדפן">Vernier hyperacuity, measured in your browser</h2>
     <p class="sub">The perceptual effect Qeben is built on, as a working instrument — including an honest account of what a screen can and cannot measure.</p>
 
