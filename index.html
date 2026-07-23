@@ -115,8 +115,16 @@ body{
   font:400 17px/1.62 Heebo,"Segoe UI",system-ui,-apple-system,sans-serif;
   -webkit-font-smoothing:antialiased; overflow-x:hidden;
 }
-.wrap{max-width:var(--max); margin:0 auto; padding:0 28px}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 28px; position:relative; z-index:1}
 a{color:inherit}
+
+header, .hero, section, footer{position:relative; z-index:1}
+
+/* film grain, for depth */
+body::after{
+  content:""; position:fixed; inset:0; z-index:3; pointer-events:none; opacity:.03;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* ── header ─────────────────────────────── */
 header{
@@ -138,25 +146,55 @@ nav a:hover{color:var(--ink)}
 @media(max-width:720px){ nav .lnk{display:none} }
 
 /* ── hero ───────────────────────────────── */
-.hero{padding:clamp(56px,9vw,110px) 0 clamp(40px,6vw,72px)}
-.hgrid{display:grid; grid-template-columns:1fr .92fr; gap:clamp(28px,5vw,64px); align-items:center}
-@media(max-width:900px){ .hgrid{grid-template-columns:1fr; gap:36px} }
-h1{
-  font-weight:900; font-size:clamp(44px,7.4vw,84px); line-height:.97;
-  letter-spacing:-.035em; margin:0 0 22px;
+.hero{
+  position:relative; min-height:min(94svh, 940px); display:flex; align-items:center;
+  overflow:hidden; border-bottom:1px solid var(--hair); padding-block:clamp(70px,9vw,110px);
 }
-.lede{font-size:clamp(17px,1.9vw,21px); color:var(--muted); max-width:37ch; margin:0 0 30px; font-weight:300}
+#gridcv{position:absolute; inset:0; width:100%; height:100%; z-index:0; display:block}
+.hero::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:radial-gradient(140% 90% at 14% 46%, var(--bg) 26%, transparent 72%);
+}
+.heroinner{position:relative; z-index:2; width:100%}
+.hgrid{display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(28px,5vw,64px); align-items:center}
+@media(max-width:900px){ .hgrid{grid-template-columns:1fr; gap:30px} }
+h1{
+  font-weight:900; font-size:clamp(54px,11.5vw,138px); line-height:.9;
+  letter-spacing:-.05em; margin:0 0 26px;
+}
+.lede{font-size:clamp(18px,2.05vw,23px); color:var(--muted); max-width:40ch; margin:0 0 32px; font-weight:300}
 .lede b{color:var(--ink); font-weight:500}
 .tags{display:flex; flex-wrap:wrap; gap:8px}
 .tag{
   font-size:12.5px; letter-spacing:1.5px; text-transform:uppercase; font-weight:500;
   color:var(--faint); border:1px solid var(--line); border-radius:999px; padding:6px 13px;
+  background:color-mix(in srgb, var(--bg) 70%, transparent); backdrop-filter:blur(6px);
 }
 .stage{
-  background:var(--paper); border:1px solid var(--line); border-radius:16px;
-  box-shadow:var(--shadow); overflow:hidden;
+  border-radius:18px; overflow:hidden;
+  background:color-mix(in srgb, var(--paper) 76%, transparent);
+  border:1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  backdrop-filter:blur(10px); box-shadow:var(--shadow);
 }
 .stage svg{display:block; width:100%; height:auto}
+@media(max-width:900px){ .stage{display:none} }
+.cta{margin:30px 0 0}
+.cta a{
+  display:inline-flex; align-items:center; gap:9px; min-height:48px; padding:12px 24px;
+  border-radius:999px; text-decoration:none; font-weight:500; font-size:16px;
+  background:var(--primary); color:#fff; box-shadow:var(--shadow); transition:transform .18s, opacity .18s;
+}
+.cta a:hover{transform:translateY(-2px); opacity:.94}
+.scrollcue{
+  position:absolute; z-index:2; inset-block-end:26px; inset-inline-start:50%; transform:translateX(-50%);
+  width:22px; height:36px; border:1.6px solid var(--line); border-radius:12px;
+}
+.scrollcue::after{
+  content:""; position:absolute; inset-inline-start:50%; top:7px; width:3px; height:7px; border-radius:2px;
+  background:var(--primary); transform:translateX(-50%); animation:cue 1.9s ease-in-out infinite;
+}
+@keyframes cue{0%,100%{opacity:0; transform:translate(-50%,0)}40%{opacity:1}70%{opacity:0; transform:translate(-50%,11px)}}
+@media(max-width:900px){ .scrollcue{display:none} }
 
 /* ── figures ────────────────────────────── */
 .figs{
@@ -164,9 +202,15 @@ h1{
   background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;
 }
 @media(max-width:720px){ .figs{grid-template-columns:repeat(2,1fr)} }
-.fig{background:var(--bg); padding:26px 20px; text-align:center}
-.fig .n{font-size:clamp(30px,4.2vw,44px); font-weight:900; letter-spacing:-.03em; color:var(--primary); line-height:1}
-.fig .l{font-size:11.5px; letter-spacing:1.8px; text-transform:uppercase; color:var(--faint); margin-top:9px; font-weight:500}
+.fig{background:var(--bg); padding:38px 20px 32px; text-align:center}
+.fig .n{font-size:clamp(40px,6.4vw,72px); font-weight:900; letter-spacing:-.045em; color:var(--primary); line-height:.95}
+.fig .l{font-size:11.5px; letter-spacing:1.8px; text-transform:uppercase; color:var(--faint); margin-top:13px; font-weight:500}
+
+/* film grain — takes the flatness off the large surfaces */
+body::before{
+  content:""; position:fixed; inset:0; z-index:100; pointer-events:none; opacity:.038;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
 /* ── sections ───────────────────────────── */
 section{padding:clamp(58px,8vw,104px) 0}
@@ -198,12 +242,23 @@ h2{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.028em; marg
 }
 
 /* ── work ───────────────────────────────── */
-.proj{border-top:1px solid var(--line); padding-top:38px; margin-top:54px}
+.proj{position:relative; border-top:1px solid var(--line); padding-top:44px; margin-top:72px}
 .proj:first-of-type{margin-top:0}
-.motif{border:1px solid var(--line); border-radius:13px; background:var(--paper); overflow:hidden; margin-bottom:28px}
+.pindex{
+  position:absolute; inset-inline-end:0; top:26px; z-index:0; pointer-events:none;
+  font-size:clamp(64px,10vw,132px); font-weight:900; line-height:.85; letter-spacing:-.06em;
+  color:var(--line); opacity:.55;
+}
+.motif{
+  position:relative; z-index:1; border:1px solid var(--line); border-radius:18px; overflow:hidden;
+  margin-bottom:30px; padding:22px 0; box-shadow:var(--shadow);
+  background:
+    radial-gradient(120% 140% at 12% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 62%),
+    var(--paper);
+}
 .motif svg{display:block; width:100%; height:auto}
-.ptitle{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:8px}
-.ptitle h3{font-size:clamp(24px,3.2vw,32px); font-weight:700; letter-spacing:-.025em; margin:0}
+.ptitle{position:relative; z-index:1; display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:10px}
+.ptitle h3{font-size:clamp(30px,4.4vw,46px); font-weight:800; letter-spacing:-.035em; margin:0}
 .badge{
   font-size:11.5px; letter-spacing:1.4px; text-transform:uppercase; font-weight:600;
   padding:4px 10px; border-radius:6px; border:1px solid var(--line); color:var(--faint);
@@ -470,7 +525,9 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 
 <a id="top"></a>
 
-<div class="wrap hero">
+<div class="hero">
+<canvas id="gridcv" aria-hidden="true"></canvas>
+<div class="wrap heroinner">
   <div class="hgrid">
     <div>
       <h1>David<br>Mashiah</h1>
@@ -480,7 +537,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
         <span class="tag" data-he="ארכיטקטורה לסוכני AI">Agent-native architecture</span>
         <span class="tag" data-he="עברית תחילה ונגישות">Hebrew-first &amp; accessible</span>
       </div>
-      <p style="margin:26px 0 0"><a href="#demo" style="color:var(--primary); font-weight:500; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px">Measure your own vernier hyperacuity →</a></p>
+      <p class="cta"><a href="#demo">Measure your own vernier hyperacuity →</a></p>
     </div>
 
     <div class="stage">
@@ -551,6 +608,8 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
       </svg>
     </div>
   </div>
+</div>
+<div class="scrollcue" aria-hidden="true"></div>
 </div>
 
 <div class="wrap">
@@ -641,6 +700,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
           <circle class="focal" cx="250" cy="65" r="2.6"/>
         </svg>
       </div>
+      <span class="pindex" aria-hidden="true">01</span>
       <div class="ptitle">
         <h3>Qeben</h3>
         <span class="badge warn">Never deployed</span>
@@ -682,6 +742,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
           </g>
         </svg>
       </div>
+      <span class="pindex" aria-hidden="true">02</span>
       <div class="ptitle">
         <h3>1 vs 100</h3>
         <span class="badge">Tel Aviv University</span>
@@ -724,6 +785,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
           </g>
         </svg>
       </div>
+      <span class="pindex" aria-hidden="true">03</span>
       <div class="ptitle">
         <h3>Leviathan</h3>
         <span class="badge">Local-first</span>
@@ -1011,6 +1073,98 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
     if (e.key === 'ArrowLeft')  { e.preventDefault(); answer('left'); }
     if (e.key === 'ArrowRight') { e.preventDefault(); answer('right'); }
   });
+
+  /* ── hero grid ──────────────────────────────────────────────
+     A full-bleed Amsler grid that bows around the pointer. The
+     distortion is the thing the whole page is about, so it belongs in
+     the hero rather than in a caption. Falls back to a slow drifting
+     lens where there is no pointer, and to a flat grid under
+     reduced-motion. ------------------------------------------------ */
+  var cv = document.getElementById('gridcv');
+  if (cv && cv.getContext) {
+    var ctx = cv.getContext('2d'), W = 0, H = 0, DPR = 1;
+    var px = -9999, py = -9999, tx = -9999, ty = -9999, hasPointer = false, t = 0;
+    var SPACING = 48, AMP = 30, RADIUS = 210, STEP = 9;
+    var stroke = '#24406E', accent = '#2DD4BF', themeKey = '';
+
+    function colours(){
+      var cs = getComputedStyle(document.documentElement);
+      var key = cs.getPropertyValue('--line') + cs.getPropertyValue('--primary');
+      if (key === themeKey) return;
+      themeKey = key;
+      stroke = cs.getPropertyValue('--line').trim() || stroke;
+      accent = cs.getPropertyValue('--primary').trim() || accent;
+    }
+    function size(){
+      DPR = Math.min(window.devicePixelRatio || 1, 2);
+      W = cv.clientWidth; H = cv.clientHeight;
+      cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+      ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    }
+    // Push a point radially away from the lens centre, with a gaussian falloff.
+    function warp(x, y, out){
+      var dx = x - px, dy = y - py, d2 = dx*dx + dy*dy, r2 = RADIUS*RADIUS;
+      if (d2 > r2 * 4 || !hasPointer) { out[0] = x; out[1] = y; return; }
+      var d = Math.sqrt(d2) || 0.0001;
+      var f = AMP * Math.exp(-d2 / (2 * r2 * 0.28));
+      out[0] = x + (dx / d) * f; out[1] = y + (dy / d) * f;
+    }
+    var pt = [0, 0];
+    function draw(){
+      colours();
+      ctx.clearRect(0, 0, W, H);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = stroke;
+      ctx.globalAlpha = 0.85;
+
+      var x, y;
+      for (x = SPACING / 2; x < W + SPACING; x += SPACING) {
+        ctx.beginPath();
+        for (y = -STEP; y <= H + STEP; y += STEP) {
+          warp(x, y, pt);
+          if (y <= 0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]);
+        }
+        ctx.stroke();
+      }
+      for (y = SPACING / 2; y < H + SPACING; y += SPACING) {
+        ctx.beginPath();
+        for (x = -STEP; x <= W + STEP; x += STEP) {
+          warp(x, y, pt);
+          if (x <= 0) ctx.moveTo(pt[0], pt[1]); else ctx.lineTo(pt[0], pt[1]);
+        }
+        ctx.stroke();
+      }
+
+      if (hasPointer) {
+        ctx.globalAlpha = 0.5; ctx.strokeStyle = accent; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.arc(px, py, RADIUS * 0.62, 0, Math.PI * 2); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function loop(){
+      if (!reduce) {
+        if (!hasPointer) {                   // no pointer: drift a lens slowly
+          t += 0.006;
+          tx = W * (0.5 + 0.3 * Math.cos(t)); ty = H * (0.5 + 0.26 * Math.sin(t * 1.3));
+          hasPointer = true;
+        }
+        px += (tx - px) * 0.09; py += (ty - py) * 0.09;
+      }
+      draw();
+      requestAnimationFrame(loop);
+    }
+
+    var pointerSeen = false;
+    cv.parentElement.addEventListener('pointermove', function(e){
+      var r = cv.getBoundingClientRect();
+      tx = e.clientX - r.left; ty = e.clientY - r.top;
+      if (!pointerSeen) { pointerSeen = true; px = tx; py = ty; }
+      hasPointer = true; t = 0;
+    });
+    window.addEventListener('resize', size);
+    size();
+    if (reduce) { hasPointer = false; draw(); } else { px = W * 0.5; py = H * 0.5; loop(); }
+  }
 
   /* ── live constraints panel ────────────────────────────────── */
   var cpbtn = document.getElementById('cpbtn'), cp = document.getElementById('cp');
