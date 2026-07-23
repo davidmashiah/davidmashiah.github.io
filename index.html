@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>David Mashiah — Hebrew-first clinical &amp; academic software engineering</title>
-<meta name="description" content="David Mashiah builds accessible, Hebrew-first software for clinics and universities: WCAG-AAA interfaces for low-vision users, multi-tenant systems, and real-time platforms at 1,000 concurrent users. Includes a calibrated vernier hyperacuity demonstration you can run in your browser.">
+<title>David Mashiah — solo software builder, agent-native architecture</title>
+<meta name="description" content="David Mashiah builds complete software systems alone — clinical, real-time and local-first — by architecting codebases so AI agents can work in them safely: generated repo maps, lint-enforced module walls, structural debt that only ratchets down. Includes a calibrated vernier hyperacuity demonstration you can run in your browser.">
 <meta name="author" content="David Mashiah">
 <meta name="color-scheme" content="light dark">
 <link rel="canonical" href="https://davidmashiah.github.io/">
@@ -38,8 +38,8 @@
       "familyName": "Mashiah",
       "url": "https://davidmashiah.github.io/",
       "image": "https://davidmashiah.github.io/assets/og.png",
-      "jobTitle": "Software engineer and systems architect",
-      "description": "Builds Hebrew-first, accessible software for clinical and academic settings, including regulated health software, multi-tenant SaaS and real-time platforms.",
+      "jobTitle": "Independent software builder",
+      "description": "Builds complete software systems solo across clinical, real-time and local-first domains, architecting codebases so that AI agents can work in them safely.",
       "knowsLanguage": ["he", "ar", "en"],
       "knowsAbout": [
         "Web accessibility",
@@ -374,10 +374,10 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
       David Mashiah
     </a>
     <nav>
-      <a class="lnk" href="#spec">Specification</a>
+      <a class="lnk" href="#method">Method</a>
+      <a class="lnk" href="#spec">Constraints</a>
       <a class="lnk" href="#work">Work</a>
       <a class="lnk" href="#demo">Demonstration</a>
-      <a class="lnk" href="#invariants">Invariants</a>
       <button class="toggle" id="tt" aria-label="Switch colour theme" title="Switch colour theme">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
@@ -393,11 +393,11 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
   <div class="hgrid">
     <div>
       <h1>David<br>Mashiah</h1>
-      <p class="lede">Software for clinics and universities, in Hebrew and Arabic, for people who often <b>cannot read small type</b>. That constraint set decides the architecture before any feature does.</p>
+      <p class="lede">I build complete software systems <b>alone</b>, across unrelated domains. The method is the point: every codebase is architected so an <b>AI agent</b> can work in it safely, which is what makes the pace possible.</p>
       <div class="tags">
-        <span class="tag">Regulated health</span>
-        <span class="tag">Multi-tenant</span>
-        <span class="tag">Real-time at scale</span>
+        <span class="tag">Solo builder</span>
+        <span class="tag">Agent-native architecture</span>
+        <span class="tag">Hebrew-first &amp; accessible</span>
       </div>
       <p style="margin:26px 0 0"><a href="#demo" style="color:var(--primary); font-weight:500; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px">Measure your own vernier hyperacuity →</a></p>
     </div>
@@ -481,11 +481,36 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
   </div>
 </div>
 
+<section id="method">
+  <div class="wrap rv">
+    <div class="eyebrow">01 — Method</div>
+    <h2>How one person ships this much</h2>
+    <p class="sub">The limit on a solo builder is not ambition, it is attention. Nobody holds three unrelated systems in their head at once — so the codebase has to hold itself.</p>
+
+    <div class="essay" style="max-width:74ch; margin-top:0">
+      <p>I build alone. That should not produce complete systems across clinical, real-time and local-first domains, and it only does because I stopped relying on <b>remembering</b> how a codebase works and started making the codebase <b>enforce</b> how it works.</p>
+
+      <p>Every repository is written to be legible to an AI agent as readily as to a person. A generated map that CI keeps honest, so an agent locates code by reading one small file instead of grepping a tree. Module walls that are lint errors rather than conventions, so a boundary cannot be quietly crossed at 2am. A hard ceiling on file length, so no file becomes the one nobody will open. A structural-debt number that is only permitted to move down.</p>
+
+      <p>None of this is exotic — it is ordinary engineering discipline, mechanised. But mechanised discipline is exactly what a person working without a team does not otherwise get, and it is the difference between an agent being a liability in a codebase and being useful in one.</p>
+    </div>
+
+    <div class="inv" style="margin-top:36px">
+      <div><h4>Boundaries are lint errors</h4><p>A cross-feature deep import fails the build. Module walls are enforced, not documented.</p></div>
+      <div><h4>400-line ceiling</h4><p>Lint-enforced, so no file quietly becomes the one nobody is willing to open.</p></div>
+      <div><h4>Repo maps are generated and CI-verified</h4><p>Never stale. Code is located by reading one small map, not by grepping the tree.</p></div>
+      <div><h4>Structural debt only ratchets down</h4><p>The build fails if it went up. Debt is a number, not a feeling.</p></div>
+      <div><h4>Accessibility is a gate</h4><p>AAA contrast, reduced motion, RTL and night mode ship on every screen, or the screen does not ship.</p></div>
+      <div><h4>Errors carry their own diagnostics</h4><p>Schema version, migration ledger, row counts, query timings, N+1 flags. Debugging starts from evidence.</p></div>
+    </div>
+  </div>
+</section>
+
 <section id="spec">
   <div class="wrap rv">
-    <div class="eyebrow">01 — Specification</div>
-    <h2>The constraints, stated plainly</h2>
-    <p class="sub">These are not preferences. They are the conditions the software has to meet before it is allowed to exist.</p>
+    <div class="eyebrow">02 — Constraints</div>
+    <h2>The requirements I keep choosing</h2>
+    <p class="sub">I am not a clinician and not an accessibility specialist. I am a generalist who keeps picking problems with awkward requirements attached — and these are the conditions that follow from them.</p>
     <table class="spec">
       <tr><th>Domain</th><td>Regulated health software · higher-education systems</td></tr>
       <tr><th>Interface languages</th><td>Hebrew (RTL) · Arabic (RTL) · English</td></tr>
@@ -505,9 +530,9 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 <section id="work">
   <div class="wrap">
     <div class="rv">
-      <div class="eyebrow">02 — Work</div>
-      <h2>Three systems</h2>
-      <p class="sub">One clinical, one real-time, one local-first. What connects them is that each is built to be maintained by someone who did not write it.</p>
+      <div class="eyebrow">03 — Work</div>
+      <h2>Three systems, built solo</h2>
+      <p class="sub">One clinical, one real-time, one local-first. No team on any of them. One reached a university stage, one reached clinicians and stopped, one runs my own life — the scoreboard is stated as it is, project by project.</p>
     </div>
 
     <!-- Qeben -->
@@ -637,7 +662,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 
 <section id="demo">
   <div class="wrap rv">
-    <div class="eyebrow">03 — Demonstration</div>
+    <div class="eyebrow">04 — Demonstration</div>
     <h2>Vernier hyperacuity, measured in your browser</h2>
     <p class="sub">The perceptual effect Qeben is built on, as a working instrument — including an honest account of what a screen can and cannot measure.</p>
 
@@ -722,22 +747,6 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
         <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5861526/" rel="noopener">Accuracy of a Self-monitoring Test for Identification and Monitoring of Age-related Macular Degeneration</a>
       </p>
     </article>
-  </div>
-</section>
-
-<section id="invariants">
-  <div class="wrap rv">
-    <div class="eyebrow">04 — Invariants</div>
-    <h2>Checked by a machine, not remembered by a person</h2>
-    <p class="sub">Conventions are forgotten the week after they are agreed. These fail the build.</p>
-    <div class="inv">
-      <div><h4>Boundaries are lint errors</h4><p>A cross-feature deep import fails the build. Module walls are enforced, not documented.</p></div>
-      <div><h4>400-line ceiling</h4><p>Lint-enforced, so no file quietly becomes the one nobody is willing to open.</p></div>
-      <div><h4>Repo maps are generated and CI-verified</h4><p>Never stale. Code is located by reading one small map, not by grepping the tree.</p></div>
-      <div><h4>Structural debt only ratchets down</h4><p>The build fails if it went up. Debt is a number, not a feeling.</p></div>
-      <div><h4>Accessibility is a gate</h4><p>AAA contrast, reduced motion, RTL and night mode ship on every screen, or the screen does not ship.</p></div>
-      <div><h4>Errors carry their own diagnostics</h4><p>Schema version, migration ledger, row counts, query timings, N+1 flags. Debugging starts from evidence.</p></div>
-    </div>
   </div>
 </section>
 
