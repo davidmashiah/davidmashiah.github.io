@@ -184,9 +184,10 @@ h2{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.028em; marg
 .spec tr:first-child{border-top:1px solid var(--line)}
 .spec tr:last-child{border-bottom:1px solid var(--line)}
 .spec th{
-  text-align:left; font-weight:500; color:var(--faint); padding:13px 20px 13px 0;
+  text-align:start; font-weight:500; color:var(--faint);
+  padding-block:16px 13px; padding-inline:0 20px;
   white-space:nowrap; vertical-align:top; width:1%; font-size:13px;
-  letter-spacing:1.3px; text-transform:uppercase; padding-top:16px;
+  letter-spacing:1.3px; text-transform:uppercase;
 }
 .spec td{padding:13px 0; color:var(--ink); vertical-align:top; font-weight:300}
 .spec td b{font-weight:500}
@@ -210,7 +211,7 @@ h2{font-size:clamp(28px,4vw,42px); font-weight:700; letter-spacing:-.028em; marg
 .badge.warn{color:var(--accent); border-color:color-mix(in srgb, var(--accent) 40%, transparent)}
 .pkick{color:var(--muted); font-weight:300; margin:0 0 20px; max-width:64ch}
 .note{
-  border-left:2px solid var(--accent); padding:12px 0 12px 18px; margin:24px 0 0;
+  border-inline-start:2px solid var(--accent); padding-block:12px; padding-inline:18px 0; margin:24px 0 0;
   color:var(--muted); font-size:15.5px; font-weight:300;
 }
 
@@ -356,6 +357,86 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 .scalelead{font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--faint); font-weight:600; margin:0 0 4px}
 @media(max-width:700px){ .cap{width:104px; font-size:12px} .cap b{font-size:12.5px} }
 
+/* ── live constraints panel ─────────────────────────────────────
+   The section above lists the conditions these systems are built to.
+   Rather than assert them, the page implements them and hands the
+   controls over. ------------------------------------------------ */
+.cpbtn{
+  position:fixed; inset-block-end:20px; inset-inline-end:20px; z-index:60;
+  display:flex; align-items:center; gap:9px; min-height:48px; padding:12px 18px;
+  border:1px solid var(--line); border-radius:999px; background:var(--paper); color:var(--ink);
+  font:inherit; font-size:14.5px; font-weight:500; cursor:pointer; box-shadow:var(--shadow);
+}
+.cpbtn:hover{border-color:var(--primary); color:var(--primary)}
+.cpbtn:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+.cpbtn svg{width:17px; height:17px; flex:none}
+.cp{
+  position:fixed; inset-block-end:80px; inset-inline-end:20px; z-index:61;
+  width:min(360px, calc(100vw - 40px)); max-height:min(76vh, 640px); overflow-y:auto;
+  background:var(--paper); border:1px solid var(--line); border-radius:16px;
+  box-shadow:var(--shadow); padding:22px;
+}
+.cp[hidden]{display:none}
+.cp h5{margin:0 0 4px; font-size:16px; font-weight:700; letter-spacing:-.01em}
+.cp > p{margin:0 0 18px; font-size:13.5px; color:var(--muted); font-weight:300; line-height:1.5}
+.cprow{margin-bottom:17px}
+.cprow > span{display:block; font-size:11.5px; letter-spacing:1.7px; text-transform:uppercase; color:var(--faint); font-weight:600; margin-bottom:8px}
+.seg{display:flex; gap:6px}
+.seg button{
+  flex:1; min-height:44px; padding:8px 6px; border:1px solid var(--line); border-radius:9px;
+  background:var(--bg); color:var(--muted); font:inherit; font-size:13px; cursor:pointer; transition:all .15s;
+}
+.seg button:hover{color:var(--ink)}
+.seg button[aria-pressed=true]{
+  border-color:var(--primary); color:var(--primary); font-weight:600;
+  background:color-mix(in srgb, var(--primary) 12%, transparent);
+}
+.seg button:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.cpnote{font-size:12.8px; color:var(--faint); line-height:1.55; border-top:1px solid var(--hair); padding-top:14px; margin:0}
+
+/* type floor — 16pt body, nothing below it */
+:root[data-size=floor] body, :root[data-size=critical] body{font-size:19px}
+:root[data-size=floor] .tag, :root[data-size=floor] .badge, :root[data-size=floor] .prog,
+:root[data-size=floor] .refs, :root[data-size=floor] .fig .l, :root[data-size=floor] .ticks span,
+:root[data-size=floor] .scalelead, :root[data-size=floor] .eyebrow, :root[data-size=floor] .step h4,
+:root[data-size=floor] .fnote, :root[data-size=floor] .cap, :root[data-size=floor] .spec th,
+:root[data-size=critical] .tag, :root[data-size=critical] .badge, :root[data-size=critical] .prog,
+:root[data-size=critical] .refs, :root[data-size=critical] .fig .l, :root[data-size=critical] .ticks span,
+:root[data-size=critical] .scalelead, :root[data-size=critical] .eyebrow, :root[data-size=critical] .step h4,
+:root[data-size=critical] .fnote, :root[data-size=critical] .cap, :root[data-size=critical] .spec th{
+  font-size:16px; letter-spacing:.04em;
+}
+/* critical text — 24pt, and touch targets grow with it */
+:root[data-size=critical] .btn, :root[data-size=critical] .result,
+:root[data-size=critical] .num, :root[data-size=critical] .warn{font-size:24px}
+:root[data-size=critical] .btn{min-height:66px; padding:16px 28px}
+:root[data-size=critical] .num{min-height:66px; width:130px}
+:root[data-size=critical] .seg button{font-size:16px; min-height:52px}
+
+/* AAA contrast — raise the low-emphasis tokens until they pass */
+:root[data-contrast=aaa]{--muted:#132540; --faint:#1E3357; --line:#9DB2CE}
+:root[data-theme=dark][data-contrast=aaa]{--muted:#E6EEFB; --faint:#D2DEF2; --line:#54709F}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme=light])[data-contrast=aaa]{--muted:#E6EEFB; --faint:#D2DEF2; --line:#54709F}
+}
+:root[data-contrast=aaa] .lede, :root[data-contrast=aaa] .sub,
+:root[data-contrast=aaa] .essay p, :root[data-contrast=aaa] .inv p{font-weight:400}
+
+/* motion off, by choice rather than by system setting */
+:root[data-motion=reduced] *, :root[data-motion=reduced] *::before, :root[data-motion=reduced] *::after{
+  animation:none !important; transition:none !important;
+}
+:root[data-motion=reduced] .rv{opacity:1; transform:none}
+:root[data-motion=reduced] .act{opacity:0}
+:root[data-motion=reduced] .a1{opacity:1}
+:root[data-motion=reduced] .chk{stroke-dashoffset:0}
+:root[data-motion=reduced] .halo{opacity:0}
+:root[data-motion=reduced] .pip-on{opacity:1}
+
+/* RTL — a numeric axis stays left-to-right even in a mirrored layout */
+[dir=rtl] .scale{direction:ltr}
+[dir=rtl] .eyebrow{letter-spacing:normal}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none!important; transition:none!important}
@@ -374,10 +455,10 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
       David Mashiah
     </a>
     <nav>
-      <a class="lnk" href="#method">Method</a>
-      <a class="lnk" href="#spec">Constraints</a>
-      <a class="lnk" href="#work">Work</a>
-      <a class="lnk" href="#demo">Demonstration</a>
+      <a class="lnk" href="#method" data-he="שיטה">Method</a>
+      <a class="lnk" href="#spec" data-he="אילוצים">Constraints</a>
+      <a class="lnk" href="#work" data-he="עבודה">Work</a>
+      <a class="lnk" href="#demo" data-he="הדגמה">Demonstration</a>
       <button class="toggle" id="tt" aria-label="Switch colour theme" title="Switch colour theme">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
           <circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.5 1.5M17.6 17.6l1.5 1.5M19.1 4.9l-1.5 1.5M6.4 17.6l-1.5 1.5"/>
@@ -395,9 +476,9 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
       <h1>David<br>Mashiah</h1>
       <p class="lede">I build complete software systems <b>alone</b>, across unrelated domains. The method is the point: every codebase is architected so an <b>AI agent</b> can work in it safely, which is what makes the pace possible.</p>
       <div class="tags">
-        <span class="tag">Solo builder</span>
-        <span class="tag">Agent-native architecture</span>
-        <span class="tag">Hebrew-first &amp; accessible</span>
+        <span class="tag" data-he="בונה עצמאי">Solo builder</span>
+        <span class="tag" data-he="ארכיטקטורה לסוכני AI">Agent-native architecture</span>
+        <span class="tag" data-he="עברית תחילה ונגישות">Hebrew-first &amp; accessible</span>
       </div>
       <p style="margin:26px 0 0"><a href="#demo" style="color:var(--primary); font-weight:500; text-decoration:none; border-bottom:1px solid currentColor; padding-bottom:2px">Measure your own vernier hyperacuity →</a></p>
     </div>
@@ -484,7 +565,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 <section id="method">
   <div class="wrap rv">
     <div class="eyebrow">01 — Method</div>
-    <h2>How one person ships this much</h2>
+    <h2 data-he="איך אדם אחד בונה כל כך הרבה">How one person ships this much</h2>
     <p class="sub">The limit on a solo builder is not ambition, it is attention. Nobody holds three unrelated systems in their head at once — so the codebase has to hold itself.</p>
 
     <div class="essay" style="max-width:74ch; margin-top:0">
@@ -509,7 +590,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 <section id="spec">
   <div class="wrap rv">
     <div class="eyebrow">02 — Constraints</div>
-    <h2>The requirements I keep choosing</h2>
+    <h2 data-he="הדרישות שאני בוחר בהן שוב ושוב">The requirements I keep choosing</h2>
     <p class="sub">I am not a clinician and not an accessibility specialist. I am a generalist who keeps picking problems with awkward requirements attached — and these are the conditions that follow from them.</p>
     <table class="spec">
       <tr><th>Domain</th><td>Regulated health software · higher-education systems</td></tr>
@@ -531,7 +612,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
   <div class="wrap">
     <div class="rv">
       <div class="eyebrow">03 — Work</div>
-      <h2>Three systems, built solo</h2>
+      <h2 data-he="שלוש מערכות, שנבנו לבד">Three systems, built solo</h2>
       <p class="sub">One clinical, one real-time, one local-first. No team on any of them. One reached a university stage, one reached clinicians and stopped, one runs my own life — the scoreboard is stated as it is, project by project.</p>
     </div>
 
@@ -663,7 +744,7 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
 <section id="demo">
   <div class="wrap rv">
     <div class="eyebrow">04 — Demonstration</div>
-    <h2>Vernier hyperacuity, measured in your browser</h2>
+    <h2 data-he="חדות ורנייה, נמדדת בדפדפן">Vernier hyperacuity, measured in your browser</h2>
     <p class="sub">The perceptual effect Qeben is built on, as a working instrument — including an honest account of what a screen can and cannot measure.</p>
 
     <div class="demo">
@@ -760,6 +841,53 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
     </div>
   </div>
 </footer>
+
+<button class="cpbtn" id="cpbtn" aria-expanded="false" aria-controls="cp">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
+    <path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2.4" fill="var(--paper)"/><circle cx="15" cy="12" r="2.4" fill="var(--paper)"/><circle cx="8" cy="18" r="2.4" fill="var(--paper)"/>
+  </svg>
+  <span data-he="אילוצים">Constraints</span>
+</button>
+
+<div class="cp" id="cp" role="dialog" aria-label="Live accessibility constraints" hidden>
+  <h5 data-he="נסו את האילוצים בעצמכם">Try the constraints yourself</h5>
+  <p>The section above lists what these systems are built to meet. This page implements the same rules — change them and watch it comply.</p>
+
+  <div class="cprow">
+    <span>Type scale</span>
+    <div class="seg" data-key="size">
+      <button data-v="default" aria-pressed="true">Default</button>
+      <button data-v="floor">16pt floor</button>
+      <button data-v="critical">24pt critical</button>
+    </div>
+  </div>
+
+  <div class="cprow">
+    <span>Contrast</span>
+    <div class="seg" data-key="contrast">
+      <button data-v="default" aria-pressed="true">Default</button>
+      <button data-v="aaa">WCAG AAA</button>
+    </div>
+  </div>
+
+  <div class="cprow">
+    <span>Motion</span>
+    <div class="seg" data-key="motion">
+      <button data-v="default" aria-pressed="true">Default</button>
+      <button data-v="reduced">Reduced</button>
+    </div>
+  </div>
+
+  <div class="cprow">
+    <span>Direction</span>
+    <div class="seg" data-key="dir">
+      <button data-v="ltr" aria-pressed="true">LTR</button>
+      <button data-v="rtl">RTL · עברית</button>
+    </div>
+  </div>
+
+  <p class="cpnote">RTL mirrors the layout and switches headings to Hebrew; body copy stays English here. The scale diagram deliberately stays left-to-right — a numeric axis does not mirror, even in an RTL page.</p>
+</div>
 
 <script>
 (function(){
@@ -882,6 +1010,45 @@ footer{border-top:1px solid var(--line); padding:44px 0 60px}
     if (task.classList.contains('hide')) return;
     if (e.key === 'ArrowLeft')  { e.preventDefault(); answer('left'); }
     if (e.key === 'ArrowRight') { e.preventDefault(); answer('right'); }
+  });
+
+  /* ── live constraints panel ────────────────────────────────── */
+  var cpbtn = document.getElementById('cpbtn'), cp = document.getElementById('cp');
+
+  cpbtn.addEventListener('click', function(){
+    var open = cp.hidden;
+    cp.hidden = !open;
+    cpbtn.setAttribute('aria-expanded', String(open));
+    if (open) cp.querySelector('button').focus();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && !cp.hidden) { cp.hidden = true; cpbtn.setAttribute('aria-expanded','false'); cpbtn.focus(); }
+  });
+  document.addEventListener('click', function(e){
+    if (cp.hidden || cp.contains(e.target) || cpbtn.contains(e.target)) return;
+    cp.hidden = true; cpbtn.setAttribute('aria-expanded','false');
+  });
+
+  // Hebrew headings are held in data-he; the English original is kept so the
+  // switch is reversible without a reload.
+  function setLang(rtl){
+    document.documentElement.setAttribute('dir', rtl ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', rtl ? 'he' : 'en');
+    document.querySelectorAll('[data-he]').forEach(function(el){
+      if (!el.dataset.en) el.dataset.en = el.textContent;
+      el.textContent = rtl ? el.dataset.he : el.dataset.en;
+    });
+  }
+
+  document.querySelectorAll('.seg').forEach(function(seg){
+    seg.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      seg.querySelectorAll('button').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      var key = seg.dataset.key, v = b.dataset.v;
+      if (key === 'dir') setLang(v === 'rtl');
+      else if (v === 'default') document.documentElement.removeAttribute('data-' + key);
+      else document.documentElement.setAttribute('data-' + key, v);
+    });
   });
 })();
 </script>
